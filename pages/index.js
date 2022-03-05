@@ -7,10 +7,15 @@ export default function Home() {
 
   return (
     <Wrapper>
+    {address ? (
+      <h2>{address}</h2>
+    ) : (
       <WalletConnect>
         <Button onClick={() => connectWallet('injected')}>Connect Wallet</Button>
         <Details>You need Chrom to be <br /> able to run this app.</Details>
       </WalletConnect>
+    )    
+    }
     </Wrapper>
   )
 }
