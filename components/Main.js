@@ -15,7 +15,7 @@ export default Main
 const Wrapper = styled.div`
     display: flex;
     max-width: calc(100vh - 64px);
-    overflow: scroll;
+    overflow: hidden;
 
     & div {
         border-radius: .4rem;
