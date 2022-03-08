@@ -47,7 +47,7 @@ export const coins = [
     allocation: 17.89,
   },
   {
-    name: 'Terra',
+    name: 'Terra 🌙',
     sign: 'LUNA',
     logo: lunaLogo,
     balanceEur: 1.2,
@@ -57,7 +57,7 @@ export const coins = [
     allocation: 17.89,
   },
   {
-    name: 'Dogecoin 🌙',
+    name: 'Dogecoin',
     sign: 'DOGE',
     logo: dogeLogo,
     balanceEur: 1.2,
