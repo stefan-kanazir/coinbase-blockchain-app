@@ -6,23 +6,6 @@ import Coin from './Coin'
 import BalanceChart from './BalanceChart'
 
 const Portfolio = () => {
-    const [sanityTokens, setSanityTokens] = useState([])
-
-    useEffect(() => {
-        const getCoins = async() => {
-            try {
-                const coins = await fetch("https://zglgr2ev.api.sanity.io/v1/data/query/production?query=*%5B_type%3D%3D%27coins%27%5D%20%7B%0A%20%20name%2C%0A%20%20eurPrice%2C%0A%20%20contractAddress%2C%0A%20%20symbol%2C%0A%20%20logo%0A%7D")
-                const tempSanityTokens = await coins.json()
-                console.log(tempSanityTokens.result)
-                setSanityTokens(tempSanityTokens.result)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        return getCoins()
-    }, [])
-
   return (
     <Wrapper>
         <Content>
