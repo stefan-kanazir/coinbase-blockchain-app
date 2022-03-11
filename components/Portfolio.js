@@ -6,6 +6,28 @@ import Coin from './Coin'
 import BalanceChart from './BalanceChart'
 
 const Portfolio = ({thirdWebTokens, sanityTokens, walletAddress}) => {
+    const [walletBalance, setWalletBalance] = useState(0)
+    const tokenToEur = {}
+
+    for (const token of sanityTokens) {
+        tokenToEur[token.contractAddress] = Number(token.eurPrice)
+    }
+
+    useEffect(() => {
+        const calculateTotalBalance = async () => {
+            const totalBalance = await Promise.all(
+                thirdWebTokens.map(async token => {
+                    const balance = await token.balanceOf(walletAddress)
+                    return Number(balance.displayValue) * tokenToEur[token.address]
+                })
+            )
+
+            setWalletBalance(totalBalance.reduce((acc, curr) => acc + curr, 0))
+        }
+        
+        return calculateTotalBalance()
+    }, [thirdWebTokens, sanityTokens])
+
   return (
     <Wrapper>
         <Content>
@@ -15,8 +37,8 @@ const Portfolio = ({thirdWebTokens, sanityTokens, walletAddress}) => {
                         <BalanceTitle>Portoflio balance</BalanceTitle>
                         <BalanceValue>
                             {'€'} 
-                            {/* {walletBalance.toLocaleString()} */}
-                            46.000
+                            {walletBalance.toLocaleString()}
+                            {/* 46.000 */}
                         </BalanceValue>
                     </Balance>
                 </div>
