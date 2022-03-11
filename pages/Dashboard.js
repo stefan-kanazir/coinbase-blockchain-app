@@ -36,15 +36,20 @@ const Dashboard = ({address}) => {
       return getSanityAndThirdWebTokens()
   }, [])
 
-  console.log('Sanity -->', sanityTokens)
-  console.log('ThirdWeb -->', thirdWebTokens)
-
   return (
     <Wrapper>
       <Sidebar />
       <MainContainer>
-        <Header walletAddress={address}/>
-        <Main />
+        <Header 
+          walletAddress={address}
+          sanityTokens={sanityTokens}
+          thirdWebTokens={thirdWebTokens}
+        />
+        <Main 
+          walletAddress={address}
+          sanityTokens={sanityTokens}
+          thirdWebTokens={thirdWebTokens}
+        />
       </MainContainer>
     </Wrapper>
   )
