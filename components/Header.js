@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 Modal.setAppElement('#__next')
 
-const Header = ({walletAddress, connectWallet}) => {
+const Header = ({walletAddress, connectWallet, sanityTokens, thirdWebTokens}) => {
   const router = useRouter()
 
   const customStyles = {
@@ -50,7 +50,7 @@ const Header = ({walletAddress, connectWallet}) => {
         onRequestClose={() => router.push('/')}
         style={customStyles}
       >
-        <TransferModal />
+        <TransferModal sanityTokens={sanityTokens} thirdWebTokens={thirdWebTokens} walletAddress={walletAddress} />
       </Modal>
     </Wrapper>
   )
@@ -63,16 +63,30 @@ const Wrapper = styled.div`
   border-bottom: 1px solid #282b2f;
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Title = styled.div`
   font-size: 2rem;
   font-weight: 600;
   flex: 1;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 const ButtonsContainer = styled.div`
   display: flex;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
 `;
 
 const Button = styled.div`
@@ -89,6 +103,14 @@ const Button = styled.div`
   &:hover {
     cursor: pointer;
   }
+
+  @media screen and (max-width: 768px) {
+    text-align: center;
+
+    &:not(:last-child){
+      margin-right: 0;
+    }
+  }
 `;
 
 const WalletLink = styled.div`
@@ -100,6 +122,10 @@ const WalletLink = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    padding: 0.8rem;
+  }
 `;
 
 const WalletLinkTitle = styled.div`

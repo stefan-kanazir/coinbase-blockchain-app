@@ -19,15 +19,20 @@ const Main = ({thirdWebTokens, sanityTokens, walletAddress}) => {
 export default Main
 
 const Wrapper = styled.div`
-    display: flex;
-    max-width: calc(100vw - 64px);
-    overflow-x: hidden;
-    overflow-y: scroll;
-    ::-webkit-scrollbar {
-      display: none;
-    }
+  display: flex;
+  max-width: calc(100vw - 64px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
-    & div {
-        border-radius: .4rem;
-    }
+  & div {
+      border-radius: .4rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    max-width: 100%;
+  }
 `;

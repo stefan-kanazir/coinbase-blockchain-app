@@ -1,10 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { FaWallet } from 'react-icons/fa'
+import imageUrlBuilder from '@sanity/image-url'
+import { client } from '../../lib/sanity'
 
-const Transfer = () => {
+const Transfer = ({selectedToken, setAction, thirdWebTokens, walletAddress}) => {
     const [amount, setAmount] = useState()
     const [recepient, setRecepient] = useState()
+    const [imageUrl, setImageUrl] = useState(null)
+    const [activeThirdWebToken, setActiveThirdWebToken] = useState()
+
+    useEffect(() => {
+        const activeToken = thirdWebTokens.find(token => token.address === selectedToken.contractAddress)
+
+        console.log(activeToken, 'haha')
+    }, [thirdWebTokens, selectedToken])
+
+    useEffect(() => {
+        // console.log(selectedToken, '🔥')
+        const url = imageUrlBuilder(client).image(selectedToken[0].logo).url()
+        setImageUrl(url)
+    }, [selectedToken])
 
   return (
       <Wrapper>
@@ -39,10 +55,7 @@ const Transfer = () => {
                   <FieldName>Pay with</FieldName>
                   <CoinSelectList>
                     <Icon>
-                        <img 
-                            src="https://avatars.githubusercontent.com/u/59578556?v=4"
-                            alt=""
-                        />
+                        <img src={imageUrl} />
                     </Icon>
                     <CoinName>Ethereum</CoinName>
                   </CoinSelectList>

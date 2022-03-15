@@ -33,6 +33,10 @@ const Wrapper = styled.div`
     border-right: 1px solid #282b2f;
     width: calc(22rem - 32px);
     padding: 0 1rem;
+
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
 `;
 
 const LogoContainer = styled.div`
