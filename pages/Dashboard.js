@@ -61,6 +61,12 @@ const Wrapper = styled.div`
   display: flex;
   background-color: #0a0b0d;
   color: #fff;
+  position: absolute;
+  width: 100%;
+
+  @media screen and (max-width: 450px) {
+    width: auto;
+  }
 `;
 
 const MainContainer = styled.div`

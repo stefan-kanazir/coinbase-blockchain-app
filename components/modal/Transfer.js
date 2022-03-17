@@ -33,6 +33,19 @@ const Transfer = ({selectedToken, setAction, thirdWebTokens, walletAddress}) => 
         }
     }, [activeThirdWebToken])
 
+    const sendCrypto = async(amount, recepient) => {
+        console.log('sending crypto...')
+
+        if (activeThirdWebToken && amount && recepient) {
+            const tx = await activeThirdWebToken.transfer(recepient, amount.toString().concat('000000000000000000'))
+
+            console.log(tx)
+            setAction('transferred')
+        } else {
+            console.log('missing data')
+        }
+    }
+
   return (
       <Wrapper>
           <Ammount>
@@ -73,7 +86,7 @@ const Transfer = ({selectedToken, setAction, thirdWebTokens, walletAddress}) => 
               </Row>
             </TransferForm>
             <Row>
-                <Continue>Continue</Continue>
+                <Continue onClick={() => sendCrypto(amount, recepient)}>Continue</Continue>
             </Row>
             <Row>
                 <BalanceTitle>{selectedToken.symbol} Balance</BalanceTitle>
