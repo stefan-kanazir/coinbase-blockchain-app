@@ -17,7 +17,6 @@ const Transfer = ({selectedToken, setAction, thirdWebTokens, walletAddress}) => 
     }, [thirdWebTokens, selectedToken])
 
     useEffect(() => {
-        // console.log(selectedToken, '🔥')
         const url = imageUrlBuilder(client).image(selectedToken[0].logo).url()
         setImageUrl(url)
     }, [selectedToken])

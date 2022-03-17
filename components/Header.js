@@ -125,6 +125,7 @@ const WalletLink = styled.div`
 
   @media screen and (max-width: 768px) {
     padding: 0.8rem;
+    margin-right: 0;
   }
 `;
 

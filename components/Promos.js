@@ -26,6 +26,10 @@ export default Promos
 const Wrapper = styled.div`
     margin-top: 2rem;
     padding-right: 1rem;
+
+    @media screen and (max-width: 768px) {
+        padding-left: 1rem;
+    }
 `;
 
 const OfferCard = styled.div`
