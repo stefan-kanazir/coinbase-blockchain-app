@@ -9,17 +9,29 @@ const Transfer = ({selectedToken, setAction, thirdWebTokens, walletAddress}) => 
     const [recepient, setRecepient] = useState()
     const [imageUrl, setImageUrl] = useState(null)
     const [activeThirdWebToken, setActiveThirdWebToken] = useState()
+    const [balance, setBalance] = useState('Fetching...')
 
     useEffect(() => {
         const activeToken = thirdWebTokens.find(token => token.address === selectedToken.contractAddress)
 
-        console.log(activeToken, 'haha')
+        setActiveThirdWebToken(activeToken)
     }, [thirdWebTokens, selectedToken])
 
     useEffect(() => {
-        const url = imageUrlBuilder(client).image(selectedToken[0].logo).url()
+        const url = imageUrlBuilder(client).image(selectedToken.logo).url()
         setImageUrl(url)
     }, [selectedToken])
+
+    useEffect(() => {
+        const getBalance = async() => {
+            const balance = await activeThirdWebToken.balanceOf(walletAddress)
+            setBalance(balance.displayValue)
+        }
+
+        if (activeThirdWebToken) {
+            getBalance()
+        }
+    }, [activeThirdWebToken])
 
   return (
       <Wrapper>
@@ -31,7 +43,7 @@ const Transfer = ({selectedToken, setAction, thirdWebTokens, walletAddress}) => 
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                 />
-                <span>ETH</span>
+                <span>{selectedToken.symbol}</span>
               </FlexInputContainer>
               <Warning>
                   Amount is required
@@ -56,7 +68,7 @@ const Transfer = ({selectedToken, setAction, thirdWebTokens, walletAddress}) => 
                     <Icon>
                         <img src={imageUrl} />
                     </Icon>
-                    <CoinName>Ethereum</CoinName>
+                    <CoinName>{selectedToken.name}</CoinName>
                   </CoinSelectList>
               </Row>
             </TransferForm>
@@ -64,8 +76,8 @@ const Transfer = ({selectedToken, setAction, thirdWebTokens, walletAddress}) => 
                 <Continue>Continue</Continue>
             </Row>
             <Row>
-                <BalanceTitle>ETH Balance</BalanceTitle>
-                <Balance>1.24 ETH</Balance>
+                <BalanceTitle>{selectedToken.symbol} Balance</BalanceTitle>
+                <Balance>{balance} {selectedToken.symbol}</Balance>
             </Row>          
       </Wrapper>
   )
