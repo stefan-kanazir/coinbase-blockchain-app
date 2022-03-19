@@ -8,7 +8,7 @@ const CoinSelector = ({
     setSelectedToken,
     sanityTokens,
     thirdWebTokens,
-    walletAddress
+    walletAddress,
 }) => {
   return (
     <Wrapper>

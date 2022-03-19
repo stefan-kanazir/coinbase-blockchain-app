@@ -15,21 +15,21 @@ const CoinItem = ({
 }) => {
     const [balance, setBalance] = useState('Fetching...');
     const [imageUrl, setimageUrl] = useState(null);
-
+    
     useEffect(() => {
-        // const getBalance = async () => {
-        //     let activeThirdWebToken
+        const getBalance = async () => {
+            let activeThirdWebToken
 
-        //     thirdWebTokens.map(thirdWebToken => {
-        //         if (thirdWebTokens === token.contractAddress) {
-        //             activeThirdWebToken = thirdWebToken
-        //         }
-        //     })
+            thirdWebTokens.map(thirdWebToken => {
+                if (thirdWebToken.address === token.contractAddress) {
+                    activeThirdWebToken = thirdWebToken
+                }
+            })
 
-        //     const balance = await activeThirdWebToken.balanceOf(sender)
+            const balance = await activeThirdWebToken.balanceOf(sender)
 
-        //     return await setBalance(balance.displayValue.split('.'[0]))
-        // }
+            return await setBalance(balance.displayValue)
+        }
         
 
         const getImageUrl = async () => {
@@ -39,17 +39,30 @@ const CoinItem = ({
         }
 
 
-        // getBalance()
+        getBalance()
         getImageUrl()
     }, [])
 
     return (
-        <Wrapper styled={{backgroundColor: selectedToken.name === token.name && "#141519"}}>
+        <Wrapper 
+            style={{backgroundColor: selectedToken.name === token.name && "#141519"}}
+            onClick={() => {
+                setSelectedToken(token)
+                setAction('send')
+            }}
+        >
             <Main>
                 <Icon>
                     <img src={imageUrl} />
                 </Icon>
+                <NameDetails>
+                    <Name>{token.name}</Name>
+                    <Symbol>{token.symbol}</Symbol>
+                </NameDetails>
             </Main>
+            <Balance>
+                {balance} {token.symbol}
+            </Balance>
         </Wrapper>
     )
 }
@@ -65,6 +78,7 @@ const Wrapper = styled.div`
 
     &:hover {
         background-color: #0e0f14;
+        cursor: pointer;
     }
 `;
 
@@ -93,12 +107,17 @@ const Icon = styled.div`
 const Name = styled.div`
     font-size: 1.1rem;
     margin-bottom: .2rem;
-    `;
+`;
+
+const Symbol = styled.div`
+    color: #888f9b;
+    font-size: .8rem;
+`;
 
 const isSelected = styled.div`
     margin-left: .5rem;
     color: #3773f5;
-    `;
+`;
 
 const NameDetails = styled.div``;
 
