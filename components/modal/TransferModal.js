@@ -29,7 +29,13 @@ const TransferModal = ({sanityTokens, thirdWebTokens, walletAddress}) => {
                     />
                 )
             case 'receive':
-                return <Receive />
+                return (
+                    <Receive 
+                        setAction={setAction}
+                        walletAddress={walletAddress}
+                        selectedToken={selectedToken}
+                    />
+                )
             case 'select':
                 return (
                     <CoinSelector 
